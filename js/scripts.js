@@ -8,16 +8,20 @@ function Ticket(age, time, movie) {
 
 Ticket.prototype.price = function() {
   var price = 12;
+  console.log(price);
   if (this.age >= 65) {
-    $(price - 3);
+    price=price-3;
+    console.log("old");
   }
-  if (this.time <= 3) {
-    $(price - 3);
+  if (this.time < 3) {
+    price=price-3;
+    console.log("matinee");
   }
   // if (!newRelease) {
   //   $(price + 2);
   // }
   return price;
+  console.log(price);
 }
 
 Ticket.prototype.toString = function() {
@@ -36,14 +40,11 @@ $(document).ready(function() {
     event.preventDefault();
 
     var inputtedAge = $("input#age").val();
-    console.log(inputtedAge);
     var inputtedMovie = $("input:radio[name=movie]:checked").val();
-    debugger;
-    console.log(inputtedMovie);
-    var inputtedTime = $("#" + inputtedMovie + "Time").val();
-    console.log(inputtedTime);
+    var inputtedTime = $("#" + inputtedMovie + "Time :selected").text();
+    inputtedTime = parseFloat(inputtedTime);
     var newTicket = new Ticket(inputtedAge, inputtedTime, inputtedMovie);
-    debugger;
+    console.log(newTicket);
     $("ul#tickets").append("<li><span class='ticket'>" + newTicket.price() + " " + newTicket.movie + "</span></li>");
 
 
